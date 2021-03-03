@@ -22,3 +22,7 @@ type Board struct{
 	Date       time.Time      `json:"date" form:"date" bson:"date"`
 	PageView   int64          `json:"page_view" form:"page_view" bson:"page_view"`
 }
+
+func (s *Board) HandlePageView() {
+	s.PageView += 1
+}
