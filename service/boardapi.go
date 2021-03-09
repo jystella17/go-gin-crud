@@ -11,7 +11,6 @@ import (
 )
 
 func CreatePost(c *gin.Context){
-	c.JSON(200, gin.H{"message" : "Creating Post"})
 }
 
 func GetAllPosts(c *gin.Context) {
