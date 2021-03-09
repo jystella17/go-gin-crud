@@ -9,7 +9,7 @@ import (
 
 func GetHomePage(c *gin.Context){
 	c.JSON(http.StatusOK, gin.H{
-		"message" : "SM-Literature-Map",
+		"message" : "Go-Gin-CRUD",
 	})
 }
 
