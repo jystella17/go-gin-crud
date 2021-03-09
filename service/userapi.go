@@ -23,3 +23,6 @@ func UserRegister(c *gin.Context){ // Register with POST Method
 func GetUserById(c *gin.Context){ // Load User information with GET Method
 	c.JSON(http.StatusOK, gin.H{"message" : "This is User Info Page"})
 }
+
+func GetPostById(c *gin.Context){
+}
