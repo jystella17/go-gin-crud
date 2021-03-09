@@ -1,19 +1,21 @@
 package service
 
 import (
-	"context"
+	//"context"
 	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"github.com/jystella17/go-gin-crud/database"
+	//"go.mongodb.org/mongo-driver/mongo"
+	//"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	"net/http"
-	"time"
+	//"time"
 )
 
 func CreatePost(c *gin.Context){
 }
 
 func GetAllPosts(c *gin.Context) {
+	/*
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
@@ -27,6 +29,14 @@ func GetAllPosts(c *gin.Context) {
 		log.Fatalf("Ping error : %s", err)
 		panic(err)
 	}
+	*/
+
+	client,err := database.Connection()
+	if err != nil {
+		log.Fatalf("Connection error : %s", err)
+		panic(err)
+	}
+	c.JSON(http.StatusOK,gin.H{"message" : client})
 }
 
 func GetPost(c *gin.Context)  { // Read Post by Userid
