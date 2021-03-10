@@ -1,32 +1,30 @@
 package database
 
 import (
-	"context"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"database/sql"
+	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"time"
 )
 
-var (
-	client *mongo.Client
-	db *mongo.Database
-)
-
-func Connection()(*mongo.Client,error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	client,err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
-
-	if err != nil {
-		log.Fatalf("Connection error : %s",err)
+func Connection()(*sql.DB,error) {
+	db,err := sql.Open("mysql","root:theo93@go_gin_crud")
+	if err != nil{
+		log.Fatalf("DB Connection Error : %s",err)
 		panic(err)
 	}
 
-	if err := client.Ping(ctx,nil); err != nil{
-		log.Fatalf("Ping error : %s", err)
-		panic(err)
-	}
+	db.SetConnMaxLifetime(time.Minute * 5)
+	db.SetMaxOpenConns(10)
+	db.SetMaxIdleConns(10)
+	defer db.Close()
 
-	return client,nil
+	ping := db.Ping()
+	if err != nil{
+		log.Fatalf("Ping Error")
+		panic(ping.Error())
+	}
+	fmt.Println(db)
+	return db,nil
 }
