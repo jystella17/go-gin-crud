@@ -16,10 +16,11 @@ type DB struct {
 	//Status sql.DBStats
 }
 
-func (db *DB) CreatePost(c *gin.Context){
+func CreatePost(c *gin.Context){
 }
 
-func (db *DB) GetAllPosts(c *gin.Context) {
+func GetAllPosts(c *gin.Context) {
+	var db *DB
 	var (
 		post models.Board
 		posts []models.Board
@@ -43,14 +44,14 @@ func (db *DB) GetAllPosts(c *gin.Context) {
 	c.JSON(http.StatusOK,posts)
 }
 
-func (db *DB) GetPost(c *gin.Context)  { // Read Post by Userid
+func GetPost(c *gin.Context)  { // Read Post by Userid
 	c.JSON(http.StatusOK, gin.H{"message" : "This is Post View Page"})
 }
 
-func (db *DB) UpdatePost(c *gin.Context){
+func UpdatePost(c *gin.Context){
 
 }
 
-func (db *DB) DeletePost(C *gin.Context){
+func DeletePost(C *gin.Context){
 
 }
