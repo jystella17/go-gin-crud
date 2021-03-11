@@ -9,13 +9,14 @@ import (
 	"net/http"
 )
 
-func (db *DB) GetHomePage(c *gin.Context){
+func GetHomePage(c *gin.Context){
 	c.JSON(http.StatusOK, gin.H{
 		"message" : "Go-Gin-CRUD",
 	})
 }
 
-func (db *DB) GetAllUsers (c *gin.Context){
+func GetAllUsers (c *gin.Context){
+	var db *DB
 	var (
 		user models.User
 		users []models.User
@@ -39,16 +40,19 @@ func (db *DB) GetAllUsers (c *gin.Context){
 	c.JSON(http.StatusOK,users)
 }
 
-func (db *DB) UserLogin(c *gin.Context){ // Login with POST Method
+func UserLogin(c *gin.Context){ // Login with POST Method
+	var db *DB
 }
 
-func (db *DB) UserRegister(c *gin.Context){ // Register with POST Method
-	return
+func UserRegister(c *gin.Context){ // Register with POST Method
+	var db *DB
 }
 
-func (db *DB) GetUserById(c *gin.Context){ // Load User information with GET Method
+func GetUserById(c *gin.Context){ // Load User information with GET Method
+	var db *DB
 	c.JSON(http.StatusOK, gin.H{"message" : "This is User Info Page"})
 }
 
-func (db *DB) GetPostById(c *gin.Context){
+func GetPostById(c *gin.Context){
+	var db *DB
 }
