@@ -44,12 +44,12 @@ func setupRouter() *gin.Engine{
 		Database: db,
 	}
 
-	router.GET("/home", DBCtx.)
+	router.GET("/home")
 	router.GET("/user/:user_id", service.GetUserById)
-	router.GET("/board/list", service.GetAllPosts)
+	router.GET("/board/list")
 	router.GET("/board/list/:_id", service.GetPost)
 	router.GET("/user/:user_id/posts", service.GetPostById)
-	router.GET("/admin/user-info", service.GetAllUsers)
+	router.GET("/admin/user-info")
 	router.POST("/board/create-post", service.CreatePost)
 	router.POST("/login", service.UserLogin)
 	router.POST("/register", service.UserRegister)
