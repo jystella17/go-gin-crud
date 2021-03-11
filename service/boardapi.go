@@ -1,52 +1,56 @@
 package service
 
 import (
-	//"context"
+	"database/sql"
 	"github.com/gin-gonic/gin"
-	"github.com/jystella17/go-gin-crud/database"
-	//"go.mongodb.org/mongo-driver/mongo"
-	//"go.mongodb.org/mongo-driver/mongo/options"
+	"github.com/jystella17/go-gin-crud/models"
+	//"github.com/jystella17/go-gin-crud/database"
 	"log"
 	"net/http"
+	//"github.com/go-sql-driver/mysql"
 	//"time"
 )
 
-func CreatePost(c *gin.Context){
+type DB struct {
+	Database *sql.DB
+	//Status sql.DBStats
 }
 
-func GetAllPosts(c *gin.Context) {
-	/*
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
-	if err != nil {
-		log.Fatalf("Connection error : %s", err)
-		panic(err)
-	}
-
-	if err := client.Ping(ctx, nil); err != nil {
-		log.Fatalf("Ping error : %s", err)
-		panic(err)
-	}
-	*/
-
-	client,err := database.Connection()
-	if err != nil {
-		log.Fatalf("Connection error : %s", err)
-		panic(err)
-	}
-	c.JSON(http.StatusOK,gin.H{"message" : client})
+func (db *DB) CreatePost(c *gin.Context){
 }
 
-func GetPost(c *gin.Context)  { // Read Post by Userid
+func (db *DB) GetAllPosts(c *gin.Context) {
+	var (
+		post models.Board
+		posts []models.Board
+	)
+
+	rows,err := db.Database.Query("SELECT auto_id, title, content, author, author_num, date, page_view FROM board")
+	if err != nil {
+		log.Fatalf("SQL error : %s", err)
+		panic(err)
+	}
+
+	for rows.Next(){
+		err = rows.Scan(&post.Id, &post.Title, &post.Content, &post.Author, &post.AuthorNum, &post.Date, &post.PageView)
+		posts = append(posts,post)
+		if err != nil{
+			log.Fatalf("SQL Scan Error : %s",err)
+			panic(err)
+		}
+	}
+	defer rows.Close()
+	c.JSON(http.StatusOK,posts)
+}
+
+func (db *DB) GetPost(c *gin.Context)  { // Read Post by Userid
 	c.JSON(http.StatusOK, gin.H{"message" : "This is Post View Page"})
 }
 
-func UpdatePost(c *gin.Context){
+func (db *DB) UpdatePost(c *gin.Context){
 
 }
 
-func DeletePost(C *gin.Context){
+func (db *DB) DeletePost(C *gin.Context){
 
 }
