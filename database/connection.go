@@ -9,7 +9,7 @@ import (
 )
 
 func Connection()(*sql.DB,error) {
-	db,err := sql.Open("mysql","root:theo93@go_gin_crud")
+	db,err := sql.Open("mysql","root:password@/go_gin_crud")
 	if err != nil{
 		log.Fatalf("DB Connection Error : %s",err)
 		panic(err)
