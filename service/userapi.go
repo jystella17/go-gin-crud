@@ -15,8 +15,7 @@ func GetHomePage(c *gin.Context){
 	})
 }
 
-func GetAllUsers (c *gin.Context){
-	var db *DB
+func (db *DB) GetAllUsers (c *gin.Context){
 	var (
 		user models.User
 		users []models.User
@@ -41,18 +40,14 @@ func GetAllUsers (c *gin.Context){
 }
 
 func UserLogin(c *gin.Context){ // Login with POST Method
-	var db *DB
 }
 
 func UserRegister(c *gin.Context){ // Register with POST Method
-	var db *DB
 }
 
-func GetUserById(c *gin.Context){ // Load User information with GET Method
-	var db *DB
+func GetUserById(c *gin.Context, db *DB){ // Load User information with GET Method
 	c.JSON(http.StatusOK, gin.H{"message" : "This is User Info Page"})
 }
 
 func GetPostById(c *gin.Context){
-	var db *DB
 }
