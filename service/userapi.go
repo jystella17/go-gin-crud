@@ -15,8 +15,7 @@ func GetHomePage(c *gin.Context){
 	})
 }
 
-func GetAllUsers (c *gin.Context){
-	var db *DB
+func GetAllUsers (c *gin.Context, db *DB){
 	var (
 		user models.User
 		users []models.User
