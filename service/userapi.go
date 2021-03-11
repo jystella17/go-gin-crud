@@ -41,18 +41,18 @@ func GetAllUsers (c *gin.Context){
 }
 
 func UserLogin(c *gin.Context){ // Login with POST Method
-	var db *DB
+	//var db *DB
 }
 
 func UserRegister(c *gin.Context){ // Register with POST Method
-	var db *DB
+	//var db *DB
 }
 
 func GetUserById(c *gin.Context){ // Load User information with GET Method
-	var db *DB
+	//var db *DB
 	c.JSON(http.StatusOK, gin.H{"message" : "This is User Info Page"})
 }
 
 func GetPostById(c *gin.Context){
-	var db *DB
+	//var db *DB
 }
