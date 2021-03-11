@@ -19,7 +19,7 @@ type DB struct {
 func CreatePost(c *gin.Context){
 }
 
-func (db *DB) GetAllPosts(c *gin.Context) {
+func GetAllPosts(c *gin.Context, db *DB) {
 	var (
 		post models.Board
 		posts []models.Board
