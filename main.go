@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/jystella17/go-gin-crud/database"
 	"github.com/jystella17/go-gin-crud/service"
 	"log"
 	"time"
@@ -33,17 +34,27 @@ func setupRouter() *gin.Engine{
 		MaxAge: 1 * time.Hour,
 	})) // CORS setting
 
-	router.GET("/home", service.GetHomePage)
+	db,err := database.Connection()
+	if err != nil{
+		log.Fatalf("Failed to connect DB")
+		panic(err)
+	}
+
+	DBCtx := service.DB{
+		Database: db,
+	}
+
+	router.GET("/home", DBCtx.)
 	router.GET("/user/:user_id", service.GetUserById)
 	router.GET("/board/list", service.GetAllPosts)
-	router.GET("/board/list/:user_id", service.GetPost)
-	router.GET("/board/create-post", service.CreatePost)
+	router.GET("/board/list/:_id", service.GetPost)
+	router.GET("/user/:user_id/posts", service.GetPostById)
+	router.GET("/admin/user-info", service.GetAllUsers)
+	router.POST("/board/create-post", service.CreatePost)
 	router.POST("/login", service.UserLogin)
 	router.POST("/register", service.UserRegister)
 	router.PUT("/board/update-post", service.UpdatePost)
 	router.DELETE("/board/delete-post", service.DeletePost)
-
-	return router
 
 	return router
 }
